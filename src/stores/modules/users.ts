@@ -18,7 +18,6 @@ export interface Pagination {
     pages: number;
 }
 export interface SearchForm {
-    page?: number;
     name?: string;
     family?: string;
     gender?: number;
@@ -26,6 +25,7 @@ export interface SearchForm {
     age?:number;
     id?:number;
     active?:boolean;
+    offset?:number;
   }
 export const useUserStore = defineStore("user", () => {
     const users = ref<User[]>([]);
@@ -42,6 +42,7 @@ export const useUserStore = defineStore("user", () => {
         };
     }
     function fetchUsers(params: any) {
+        console.log(params)
         return new Promise<void>((resolve, reject) => {
             axios.get('https://api.slingacademy.com/v1/sample-data/users', {
                 params

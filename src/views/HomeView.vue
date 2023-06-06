@@ -121,7 +121,7 @@ export default defineComponent({
         key, data[key] as string,
       ])))
     }
-    const search = ref<SearchForm>(pickByKeys({limit:50,...route.query as SearchForm}, ['name', 'page', 'gender', 'limit','id','active','family','age']));
+    const search = ref<SearchForm>(pickByKeys({limit:10,...route.query as SearchForm}, ['name', 'offset', 'gender', 'limit','id','active','family','age']));
     const users = computed(() => {
       return store.users;
     });
@@ -136,7 +136,7 @@ export default defineComponent({
 
       router.push({
         path: route.fullPath,
-        query: pickByKeys(search.value, ['name', 'page', 'gender', 'limit','id','active','family','age'])
+        query: pickByKeys(search.value, ['name','offset', 'gender', 'limit','id','active','family','age'])
       });
       store
         .fetchUsers(search.value)
@@ -144,7 +144,7 @@ export default defineComponent({
     };
 
     const handleCurrentChange = (page: number) => {
-      search.value.page = page;
+      search.value.offset = page;
       getUsers();
     };
     onMounted(() => {
