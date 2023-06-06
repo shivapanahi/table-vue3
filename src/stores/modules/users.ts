@@ -25,7 +25,7 @@ export interface SearchForm {
     limit?:number;
     age?:number;
     id?:number;
-    active:boolean;
+    active?:boolean;
   }
 export const useUserStore = defineStore("user", () => {
     const users = ref<User[]>([]);
@@ -44,16 +44,7 @@ export const useUserStore = defineStore("user", () => {
     function fetchUsers(params: any) {
         return new Promise<void>((resolve, reject) => {
             axios.get('https://api.slingacademy.com/v1/sample-data/users', {
-                params: {
-                    limit:50,
-                    offset:params.page,
-                    name:params.name,
-                    gender:params.gender,
-                    id:params.id,
-                    active:params.active,
-                    age:params.age,                    
-                    family:params.family
-                }
+                params
             })
                 .then((response) => {
                     setUsers(response.data.users)

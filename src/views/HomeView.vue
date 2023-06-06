@@ -42,13 +42,13 @@
               <div class="">
 
                 <div class="flex items-center mb-4">
-                  <input id="default-radio-1" type="radio" :value="true" v-model="search.active"  name="default-radio"
+                  <input id="default-radio-1" type="radio" :value="true" v-model="search.active"  name="active"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                   <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">active
                     </label>
                 </div>
                 <div class="flex items-center">
-                  <input checked id="default-radio-2" type="radio" :value="false" v-model="search.active" name="default-radio"
+                  <input  id="default-radio-2" type="radio" :value="false" v-model="search.active" name="deactive"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                   <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                     deactive</label>
@@ -118,10 +118,10 @@ export default defineComponent({
     const cloneJSON = (dat: any) => JSON.parse(JSON.stringify(dat))
     const pickByKeys = (data: SearchForm, keys: Array<keyof SearchForm>) => {
       return cloneJSON(Object.fromEntries(keys.map(key => [
-        key, data[key] as string
+        key, data[key] as string,
       ])))
     }
-    const search = ref<SearchForm>(pickByKeys(route.query as SearchForm, ['name', 'page', 'gender', 'limit','id','active']));
+    const search = ref<SearchForm>(pickByKeys({limit:50,...route.query as SearchForm}, ['name', 'page', 'gender', 'limit','id','active','family','age']));
     const users = computed(() => {
       return store.users;
     });
@@ -136,7 +136,7 @@ export default defineComponent({
 
       router.push({
         path: route.fullPath,
-        query: pickByKeys(search.value, ['page', 'name', 'gender', 'limit','id','active'])
+        query: pickByKeys(search.value, ['name', 'page', 'gender', 'limit','id','active','family','age'])
       });
       store
         .fetchUsers(search.value)
