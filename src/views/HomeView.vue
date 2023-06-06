@@ -4,7 +4,7 @@
       <div class="card-header border-0 pt-6">
         <div class="card-title">
           <div class="d-flex align-items-center position-relative my-1">
-          <!-------start search --------->
+            <!-------start search --------->
             <div class="grid grid-cols-3 gap-4">
               <div class="">
                 <input type="text" v-model="search.name"
@@ -12,7 +12,7 @@
                   placeholder="name" />
               </div>
               <div class="">
-                <input type="text" v-model="search.family" 
+                <input type="text" v-model="search.family"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="family" />
               </div>
@@ -39,44 +39,59 @@
                   </label>
                 </div>
               </div>
+              <div class="">
+
+                <div class="flex items-center mb-4">
+                  <input id="default-radio-1" type="radio" :value="true" v-model="search.active"  name="default-radio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">active
+                    </label>
+                </div>
+                <div class="flex items-center">
+                  <input checked id="default-radio-2" type="radio" :value="false" v-model="search.active" name="default-radio"
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                  <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                    deactive</label>
+                </div>
+              </div>
               <div class="...">
                 <button
-                class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  class="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                   data-ripple-light="true" @click="getUsers()">search
                 </button>
               </div>
             </div>
-             <!-------end search --------->
+            <!-------end search --------->
           </div>
         </div>
       </div>
       <!----------- start table ------------>
-        <div>
-          <div class="table-responsive">
-            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-              <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
-                <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
-                  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">نام</th>
-                  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">نام خانوادگی</th>
-                  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">ایمیل</th>
-                  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">تلفن</th>
-                  <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">جنسیت</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="user in users" :key="user.id">
-                  <td class="px-6 py-4">{{ user.first_name }}</td>
-                  <td class="px-6 py-4">{{ user.last_name }}</td>
-                  <td class="px-6 py-4">{{ user.email }}</td>
-                  <td class="px-6 py-4">{{ user.phone }}</td>
-                  <td class="px-6 py-4">{{ user.gender }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <Pagination :pagination="usersPagination" @update="handleCurrentChange" />
+      <div>
+        <div class="table-responsive">
+          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+              <tr class="fw-bold fs-6 text-gray-800 border-bottom border-gray-200">
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">نام</th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">نام خانوادگی</th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">ایمیل</th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">تلفن</th>
+                <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">جنسیت</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="user in users" :key="user.id">
+                <td class="px-6 py-4">{{ user.first_name }}</td>
+                <td class="px-6 py-4">{{ user.last_name }}</td>
+                <td class="px-6 py-4">{{ user.email }}</td>
+                <td class="px-6 py-4">{{ user.phone }}</td>
+                <td class="px-6 py-4">{{ user.gender }}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-              <!----------- end table ------------>
+        <Pagination :pagination="usersPagination" @update="handleCurrentChange" />
+      </div>
+      <!----------- end table ------------>
     </div>
   </div>
 </template>
@@ -85,7 +100,7 @@
 import Pagination from '@/components/Pagination.vue';
 import { computed, defineComponent, onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { useUserStore,SearchForm } from "../stores/modules/users";
+import { useUserStore, SearchForm } from "../stores/modules/users";
 import {
   gender
 } from "../stores/utils";
@@ -106,7 +121,7 @@ export default defineComponent({
         key, data[key] as string
       ])))
     }
-    const search = ref<SearchForm>(pickByKeys(route.query as SearchForm, ['name', 'page', 'gender','limit']));
+    const search = ref<SearchForm>(pickByKeys(route.query as SearchForm, ['name', 'page', 'gender', 'limit','id','active']));
     const users = computed(() => {
       return store.users;
     });
@@ -121,7 +136,7 @@ export default defineComponent({
 
       router.push({
         path: route.fullPath,
-        query: pickByKeys(search.value, ['page', 'name', 'gender','limit'])
+        query: pickByKeys(search.value, ['page', 'name', 'gender', 'limit','id','active'])
       });
       store
         .fetchUsers(search.value)

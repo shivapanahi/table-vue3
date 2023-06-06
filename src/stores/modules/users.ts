@@ -25,6 +25,7 @@ export interface SearchForm {
     limit?:number;
     age?:number;
     id?:number;
+    active:boolean;
   }
 export const useUserStore = defineStore("user", () => {
     const users = ref<User[]>([]);
@@ -47,7 +48,11 @@ export const useUserStore = defineStore("user", () => {
                     limit:50,
                     offset:params.page,
                     name:params.name,
-                    gender:params.gender
+                    gender:params.gender,
+                    id:params.id,
+                    active:params.active,
+                    age:params.age,                    
+                    family:params.family
                 }
             })
                 .then((response) => {
