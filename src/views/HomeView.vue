@@ -121,7 +121,7 @@ export default defineComponent({
         key, data[key] as string,
       ])))
     }
-    const search = ref<SearchForm>(pickByKeys({limit:10,...route.query as SearchForm}, ['name', 'offset', 'gender', 'limit','id','active','family','age']));
+    const search = ref<SearchForm>(pickByKeys({limit:15,...route.query as SearchForm}, ['name', 'offset', 'gender', 'limit','id','active','family','age']));
     const users = computed(() => {
       return store.users;
     });
